@@ -16,7 +16,6 @@ function getQueryVariable(variable) {
 
 function lrc2json(lrc) {
     const lines = lrc.split('\n');
-    console.debug(lines);
     const result = [];
 
     for (let i = 0; i < lines.length; ++i) {
@@ -27,10 +26,8 @@ function lrc2json(lrc) {
             const timeArray = time.split(':');
             const timeInMs = parseInt(timeArray[0]) * 60 + parseFloat(timeArray[1]);
 
-            console.debug(time, timeArray, timeInMs);
-
             const lyric = line.match(/\](.*)/)[1];
-            console.debug(lyric);
+            if (!lyric.trim()) continue;
 
             result.push({
                 time: timeInMs,

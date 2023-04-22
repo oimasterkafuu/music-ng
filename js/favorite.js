@@ -1,7 +1,7 @@
 let loginStatus = await api('/login/status');
 if (!loginStatus.data.profile) {
     console.debug('not logged in');
-    window.location = 'index.html';
+    window.location = 'login.html';
 }
 
 async function getFavoritePlaylistId() {
@@ -23,7 +23,32 @@ let tracks = await getTracks(favoritePlaylistId);
 console.debug('tracks', tracks);
 
 let table = document.createElement('table');
-for(let track of tracks){
+
+(() => {
+    let thead = document.createElement('thead');
+    let header = document.createElement('tr');
+    let id = document.createElement('th');
+    let name = document.createElement('th');
+    let artist = document.createElement('th');
+    let album = document.createElement('th');
+    let duration = document.createElement('th');
+    id.innerText = '编号';
+    name.innerText = '歌曲名称';
+    artist.innerText = '歌手';
+    album.innerText = '专辑';
+    duration.innerText = '时长';
+    header.appendChild(id);
+    header.appendChild(name);
+    header.appendChild(artist);
+    header.appendChild(album);
+    header.appendChild(duration);
+    thead.appendChild(header);
+    table.appendChild(thead);
+})();
+
+let tbody = document.createElement('tbody');
+
+for (let track of tracks) {
     let row = document.createElement('tr');
     let id = document.createElement('td');
     let name = document.createElement('td');
@@ -43,6 +68,9 @@ for(let track of tracks){
     row.appendChild(artist);
     row.appendChild(album);
     row.appendChild(duration);
-    table.appendChild(row);
+    tbody.appendChild(row);
 }
+
+table.appendChild(tbody);
+
 document.getElementById('list').appendChild(table);

@@ -1,12 +1,24 @@
 let loginStatus = await api('/login/status');
 if (!loginStatus.data.profile) {
     console.debug('not logged in');
-    window.location = 'index.html';
+    window.location = 'login.html';
 }
 
 let querySong = getQueryVariable('id');
 if (!querySong)
     window.history.back();
+
+let detail = await api(`/song/detail`, { ids: querySong });
+let songName = detail.songs[0].name;
+console.debug('song name', songName);
+let coverUrl = detail.songs[0].al.picUrl;
+console.debug('cover url', coverUrl);
+
+$('#name').text(songName);
+$('#cover').attr('src', coverUrl);
+$('body').css('background-image', `url(${coverUrl})`);
+$('body').css('background-position-y', 'center');
+$('body').css('backdrop-filter', 'blur(30px)');
 
 let song = await api(`/song/url`, { id: querySong });
 let url = song.data[0].url;
@@ -30,19 +42,43 @@ for (let i = 0; i < lrcJson.length; i++) {
     content.html(lrcJson[i].lyric);
     // set id
     content.attr('id', `lyric-${i}`);
+    // set class
+    content.attr('class', 'lyric-row');
     $('#lyric').append(content);
 }
 
 let i = 0;
+let move = 0;
 audio.addEventListener('timeupdate', () => {
     if (i >= lrcJson.length)
         return;
     if (audio.currentTime >= lrcJson[i].time - 0.2) {
-        // $('.active').removeClass('active');
-        // $(`#lyric-${i}`).addClass('active');
-        $(`#lyric-${i}`).attr('style', 'color: #fff; background-color: #000');
-        $(`#lyric-${i - 1}`).attr('style', 'color: #000; background-color: #fff');
+        for (let j = 0; j < lrcJson.length; ++j) {
+            $(`#lyric-${j}`).css('transition', `transform ${Math.max(200, Math.abs((i - 3) - j) * 100)}ms ease-in-out`);
+        }
+        for (let j = 0; j < lrcJson.length; ++j) {
+            $(`#lyric-${j}`).css('opacity', Math.max(1 - Math.abs(i - j) / 3, 0.7));
+            $(`#lyric-${j}`).css('filter', `blur(${Math.min(Math.abs(i - j), 10)}px)`);
+            $(`#lyric-${j}`).css('box-shadow', `0 0 ${Math.max(30 - Math.abs(i - j) * 10, 10)}px 0 rgba(0, 0, 0, 0.5)`);
+        }
+
+        let lyric = $(`#lyric-${i}`);
+        let top = lyric.offset().top;
+        let middle = top + lyric.height() / 2;
+        middle -= $(window).height() / 2;
+        console.debug('move', middle);
+
+        move += middle;
+
+        for (let j = 0; j < lrcJson.length; ++j) {
+            $(`#lyric-${j}`).css('transform', `translateY(${-move}px) scale(1)`);
+        }
+
+        $(`#lyric-${i}`).css('transform', `translateY(${-move}px) scale(1.2)`);
+
         ++i;
     }
 });
+
 audio.play();
+$('#cover').css('animation', 'spin 10s linear infinite');
