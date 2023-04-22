@@ -8,6 +8,7 @@ body {
     height: 100vh;
 
     background-image: url(../img/bg.jpg);
+    background-color: rgb(234, 189, 102);
     background-position-x: center;
     background-position-y: top;
     background-size: cover;
@@ -41,6 +42,7 @@ body {
 #list{
     flex-grow: 1;
     overflow-y: scroll;
+    width: 100%;
 }
 
 a{

@@ -7,6 +7,7 @@ body {
     width: 100vw;
     height: 100vh;
     background: url('../img/bg.jpg') center top no-repeat;
+    background-color: rgb(234, 189, 102);
     background-size: cover;
     background-repeat: no-repeat;
 

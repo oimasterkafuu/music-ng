@@ -8,6 +8,7 @@ body {
     height: 100vh;
     
     background-image: url(../img/bg.jpg);
+    background-color: rgb(234, 189, 102);
     background-position-x: center;
     background-position-y: top;
 
