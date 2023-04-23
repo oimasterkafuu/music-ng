@@ -4,8 +4,8 @@ if (loginStatus.data.profile) {
     window.location = 'favorite.html';
 }
 
-let key = await api('/login/qr/key');
-console.debug('key', key.data.unikey, false);
+let key = await api('/login/qr/key', false);
+console.debug('key', key.data.unikey);
 let qr = await api('/login/qr/create', { key: key.data.unikey, qrimg: true });
 console.debug('qr', qr.data.qrimg);
 
@@ -68,16 +68,16 @@ let interval = setInterval(async () => {
     if (status.code == 803) {
         clearInterval(interval);
         console.debug('logged in');
-        $('.container').animate({
-            boxShadow: '0 0 30px rgba(0, 255, 0, 0.5)'
+        $('.container').css({
+            boxShadow: '0 0 60px rgba(0, 255, 0, 0.5)'
         }, 500);
         $('#text').html('才、才没有高兴呢！<br>哼！');
         setTimeout(() => {
             window.location = 'favorite.html';
         }, 1000);
     } else if (status.code == 802) {
-        $('.container').animate({
-            boxShadow: '0 0 20px rgba(255, 255, 0, 0.5)'
+        $('.container').css({
+            boxShadow: '0 0 40px rgba(255, 255, 0, 0.5)'
         }, 1000);
         $('#text').html('笨蛋笨蛋笨蛋！<br>怎么连授权都不会！');
     } else if (status.code == 800) {

@@ -54,7 +54,7 @@ audio.addEventListener('timeupdate', () => {
         return;
     if (audio.currentTime >= lrcJson[i].time - 0.2) {
         for (let j = 0; j < lrcJson.length; ++j) {
-            $(`#lyric-${j}`).css('transition', `transform ${Math.max(200, Math.abs((i - 3) - j) * 100)}ms ease-in-out`);
+            $(`#lyric-${j}`).css('transition', `all ${Math.max(200, Math.abs((i - 3) - j) * 100)}ms ease-in-out`);
         }
         for (let j = 0; j < lrcJson.length; ++j) {
             $(`#lyric-${j}`).css('opacity', Math.max(1 - Math.abs(i - j) / 3, 0.7));
