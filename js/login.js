@@ -5,7 +5,7 @@ if (loginStatus.data.profile) {
 }
 
 let key = await api('/login/qr/key');
-console.debug('key', key.data.unikey);
+console.debug('key', key.data.unikey, false);
 let qr = await api('/login/qr/create', { key: key.data.unikey, qrimg: true });
 console.debug('qr', qr.data.qrimg);
 
@@ -63,7 +63,7 @@ img.onload = () => {
 }
 
 let interval = setInterval(async () => {
-    let status = await api('/login/qr/check', { key: key.data.unikey });
+    let status = await api('/login/qr/check', { key: key.data.unikey }, false);
     console.debug('status', status);
     if (status.code == 803) {
         clearInterval(interval);
