@@ -6,16 +6,13 @@
 body {
     width: 100vw;
     height: 100vh;
-    
     background-image: url(../img/bg.jpg);
     background-color: rgb(234, 189, 102);
     background-position-x: center;
     background-position-y: top;
     transition: background-position 6000ms ease-in-out;
-
     background-size: cover;
     background-repeat: no-repeat;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +26,9 @@ body {
     border-radius: 10px;
 
     backdrop-filter: blur(10px);
+    /* no transition */
+    transition: none;
+
     /* lighter */
     background-color: rgba(255, 255, 255, 0.3);
     /* shadow */

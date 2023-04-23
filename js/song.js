@@ -17,8 +17,8 @@ console.debug('cover url', coverUrl);
 $('#name').text(songName);
 $('#cover').attr('src', coverUrl);
 $('body').css('background-image', `url(${coverUrl})`);
-$('body').css('background-position-y', 'center');
-$('body').css('backdrop-filter', 'blur(30px)');
+$('body').css('backdrop-filter', 'blur(50px)');
+$('body').css('background-size', '150vw 150vh');
 
 let song = await api(`/song/url`, { id: querySong });
 let url = song.data[0].url;
@@ -82,3 +82,10 @@ audio.addEventListener('timeupdate', () => {
 
 audio.play();
 $('#cover').css('animation', 'spin 10s linear infinite');
+function bgStep() {
+    // random bg position
+    $('body').css('background-position-x', `${Math.random() * 100}%`);
+    $('body').css('background-position-y', `${Math.random() * 100}%`);
+}
+setInterval(bgStep, 6000);
+bgStep();
