@@ -1,4 +1,4 @@
-const ncmaUrl = 'https://ncma.oimaster.cf';
+const ncmaUrl = 'https://ncma.oimaster.top';
 
 if (!localStorage.getItem('cookie'))
     localStorage.setItem('cookie', '');

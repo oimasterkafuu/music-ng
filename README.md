@@ -20,7 +20,7 @@ macOS 和 iPad 上，网易云音乐客户端的「歌词」界面都很微妙�
 
 ## 如何使用？
 
-这个项目不需要安装，直接下载源码，然后打开 `index.html` 即可。你也可以打开 [在线 Demo](https://music.oimaster.cf) 进行体验。
+这个项目不需要安装，直接下载源码，然后打开 `index.html` 即可。你也可以打开 [在线 Demo](https://music.oimaster.top) 进行体验。
 
 因为网易云音乐的版权问题，部分歌曲可能无法在非中国大陆地区播放。
 
